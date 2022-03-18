@@ -16,7 +16,7 @@
 }
 .container .list {
   margin-top:40px;
-  margin-left: 470px;
+  margin-left: 570px;
   display:flex;
   flex-direction: row;
   justify-content:center;
@@ -98,4 +98,9 @@ input {
 
 input:focus {
   box-shadow: 1px 1px 1px rgba(0,0,0,.15);
+}
+
+.ma2 {
+  margin: -2.5rem;
+  margin-left: 5px;
 }

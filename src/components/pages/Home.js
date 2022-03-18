@@ -1,10 +1,12 @@
 import React from 'react';
-import CheckboxForm from '../CheckboxForm';
+import CheckboxForm from '../Form/CheckboxForm';
+import Dashboard from '../UserDashboard/Dashboard';
 
 const Home = () => {
+  const isLoggedIn = false;
   return (
     <div>
-      <CheckboxForm />
+      {isLoggedIn ? <Dashboard />  : <CheckboxForm /> }
     </div>
   )
 }
