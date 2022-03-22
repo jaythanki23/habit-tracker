@@ -84,14 +84,13 @@
   background-color: #06C1F2;
 }
 
-input {
+#input {
   outline: none;
   padding: 5px;
   border: 1px solid #D3D3D3;
   border-radius: 10px;
   height: 34px;
   width: 400px;
-  display: block;
   margin: 15px auto;
   z-index: 999;
 }

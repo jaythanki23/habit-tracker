@@ -36,7 +36,7 @@ const CheckboxForm = () => {
       <button className='fr pa3 bw1 b--solid br2 grow bg-white' onClick={onSubmit}><i class="fa-solid fa-chevron-right"></i></button>
       <form>
         <div className='f3 b' style={{'color': '#888'}}>Create your own</div>
-        <input className='dib' type='text' name='create' value={text} onChange={onChange}/>
+        <input className='dib' type='text' name='create' value={text} onChange={onChange} id='input'/>
         <button type='submit' className='ma2 pa2 w3 bg-green bn grow' onClick={onClick}>
           <i className="fa-solid fa-right-to-bracket"></i>
         </button>
