@@ -1,0 +1,21 @@
+{
+  "name": "habit-tracker",
+  "version": "1.0.0",
+  "description": "Backend of habit tracker app",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaythanki23/habit-tracker.git"
+  },
+  "author": "Jay Thanki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaythanki23/habit-tracker/issues"
+  },
+  "homepage": "https://github.com/jaythanki23/habit-tracker#readme"
+}
