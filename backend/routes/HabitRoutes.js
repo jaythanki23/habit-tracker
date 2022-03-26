@@ -6,8 +6,8 @@ router.get('/', (req, res) => {
   res.status(200).json({ message: "Your habits" });
 });
 
-// router.post('/', (req, res) => {
-//   res.status(200).json({ message: "Created a habit" });
-// })
+router.post('/', (req, res) => {
+  res.status(200).json({ message: "Created a habit" });
+})
 
 export { router };
