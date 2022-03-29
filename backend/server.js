@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
+import { errorHandler } from './middleware/errorMiddleware.js';
 import { router as habits } from '../backend/routes/HabitRoutes.js';
 
 
@@ -12,11 +13,15 @@ const app = express();
 
 // Init Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-// app.get('/', (req, res) => {
-//   res.send("Welcome to my app");
-// })
+app.get('/', (req, res) => {
+  res.send("Welcome to my app");
+})
 
-app.use('/dashboard', habits);
+app.use('/habits', habits);
+
+// Error Middleware
+app.use(errorHandler);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

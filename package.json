@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/jaythanki23/habit-tracker/issues"
   },
-  "homepage": "https://github.com/jaythanki23/habit-tracker#readme"
+  "homepage": "https://github.com/jaythanki23/habit-tracker#readme",
+  "dependencies": {
+    "express-async-handler": "^1.2.0"
+  }
 }
