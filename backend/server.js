@@ -2,7 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
 import { errorHandler } from './middleware/errorMiddleware.js';
-import { router as habits } from '../backend/routes/HabitRoutes.js';
+import { router as habits } from './routes/habitRoutes.js';
+import { router as users } from './routes/userRoutes.js';
 import { connectDB } from './config/db.js';
 
 dotenv.config();
@@ -22,7 +23,8 @@ app.get('/', (req, res) => {
   res.send("Welcome to my app");
 })
 
-app.use('/habits', habits);
+app.use('/api/habits', habits);
+app.use('/api/users', users);
 
 // Error Middleware
 app.use(errorHandler);

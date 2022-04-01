@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 import Habit from "../model/habitModel.js";
 
 // @desc Get habits
-// @route /habits
+// @route /api/habits
 // @acces Private
 const getHabits = asyncHandler(async (req, res) => {
   const habits = await Habit.find();
@@ -11,7 +11,7 @@ const getHabits = asyncHandler(async (req, res) => {
 });
 
 // @desc Create habits
-// @route /habits
+// @route /api/habits
 // @acces Private
 const createHabits = asyncHandler(async (req, res) => {
   if(!req.body) {
