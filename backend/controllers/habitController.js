@@ -5,7 +5,7 @@ import Habit from "../model/habitModel.js";
 // @route /api/habits
 // @acces Private
 const getHabits = asyncHandler(async (req, res) => {
-  const habits = await Habit.find();
+  const habits = await Habit.find({ user: req.user.id });
 
   res.status(200).json(habits);
 });
@@ -27,7 +27,8 @@ const createHabits = asyncHandler(async (req, res) => {
     dateTime,
     day,
     month,
-    date
+    date,
+    user: req.user.id
   });
 
   res.status(200).json(habit);

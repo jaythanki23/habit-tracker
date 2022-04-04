@@ -34,7 +34,7 @@ const register = asyncHandler(async (req, res) => {
 
   if(user) {
     res.status(201).json({
-      _id: user.id,
+      id: user._id,
       name: user.name,
       email: user.email,
       token: generateToken(user._id)
@@ -77,7 +77,11 @@ const login = asyncHandler(async (req, res) => {
 // @route /api/users/me
 // @acces Public
 const getMe = asyncHandler(async (req, res) => {
-  res.json({message: 'User data'});
+  res.json({
+    id: req.user._id,
+    name: req.user.name,
+    email: req.user.email,
+  }) 
 })
 
 // Generate JWT
