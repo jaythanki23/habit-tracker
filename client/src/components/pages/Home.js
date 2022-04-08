@@ -1,5 +1,6 @@
 import React from 'react';
-import CheckboxForm from '../Form/CheckboxForm';
+import Register from '../auth/Register';
+import CheckboxForm from '../form/CheckboxForm';
 import Dashboard from '../UserDashboard/Dashboard';
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
   return (
     <div>
       {isLoggedIn ? <Dashboard />  : <CheckboxForm /> }
+      {/* <Register /> */}
     </div>
   )
 }

@@ -6,18 +6,20 @@ const Checkboxes = ({ name, status }) => {
 
   const onChecked = (e) => {
     // setIsChecked(!ischecked);
-    console.log(e.target.checked);
+    console.log(e.target.value);
     setStatus(e.target.value, e.target.checked);
   }
   
   return (
-    <div className="form-element">
-      <input type="checkbox" name="habit" value={name} id={name} onChange={onChecked} checked={status} />
+    <div>
+      {/* <input type="checkbox" name="habit" value={name} id={name} onChange={onChecked} checked={status} />
       <label htmlFor={name}>
-        <div className="title">
+        <div>
           {name}
         </div>
-      </label>
+      </label> */}
+      <input type="checkbox" className="btn-check" name={name} value={name} onChange={onChecked} id={name} checked={status} autoComplete="off" />
+      <label className="btn btn-outline-primary" htmlFor={name}>{name}</label>
     </div>
   )
 }

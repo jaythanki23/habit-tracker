@@ -1,5 +1,5 @@
 import { React, useState} from 'react';
-import './Habit.css';
+
 
 const Habit = ({ name }) => {
   const [isChecked, setIsChecked] = useState(false);
