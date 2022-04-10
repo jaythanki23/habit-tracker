@@ -8,13 +8,13 @@ const DashboardHabits = () => {
   const myHabits = habits.filter(habit => habit.status === true);
 
   return (
-    <div className='center bn br3 w-70 vh-75 mt5 pa5 bg-white shadow-1'>
-      <table>
+    <div className='m-4 p-4'>
+      <table className='table'>
         <thead>
           <tr>
-            <th>Habit</th>
-            <th>Completion</th>
-            <th>Duration (in mins)</th>
+            <th scope='col'>Habit</th>
+            <th scope='col'>Completion</th>
+            <th scope='col'>Duration (in mins)</th>
           </tr>
         </thead>
         <tbody>

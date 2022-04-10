@@ -1,12 +1,12 @@
 import { React } from 'react'
 import DashboardHabits from './DashboardHabits';
-import Date from './TodayDate';
+import CurrentDate from './CurrentDate';
 
 const Dashboard = () => {
   
   return (
     <div>
-      <Date />
+      <CurrentDate />
       <DashboardHabits />
     </div>
   )

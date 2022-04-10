@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TodayDate = () => {
+const CurrentDate = () => {
   // Get date
   const d = new Date();
   
@@ -17,8 +17,8 @@ const TodayDate = () => {
   const date = d.getDate();
 
   return (
-    <div className='f2 ma1'>{day}, {month} {date}</div>
+    <div className='fs-2 m-2 p-2'>{day}, {month} {date}</div>
   )
 }
 
-export default TodayDate
+export default CurrentDate;

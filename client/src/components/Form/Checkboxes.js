@@ -19,7 +19,7 @@ const Checkboxes = ({ name, status }) => {
         </div>
       </label> */}
       <input type="checkbox" className="btn-check" name={name} value={name} onChange={onChecked} id={name} checked={status} autoComplete="off" />
-      <label className="btn btn-outline-primary" htmlFor={name}>{name}</label>
+      <label className="fs-5 btn btn-outline-primary" htmlFor={name}>{name}</label>
     </div>
   )
 }
