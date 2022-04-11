@@ -30,7 +30,7 @@ const Habit = ({ name }) => {
         <tr>
           <td>{name}</td>
           <td><input type='checkbox' name='habit' onChange={onChecked} /></td>
-          <td><input type='number' id='duration' onChange={onChange} /></td>
+          <td><input type='number' className='border border-2 rounded' id='duration' onChange={onChange} style={{'width': '100px'}} /></td>
           <td><button type='button' className='btn btn-success' onClick={onSubmit} disabled={!isChecked}>Submit</button></td>
         </tr>
       }
