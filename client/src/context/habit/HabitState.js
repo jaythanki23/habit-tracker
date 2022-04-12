@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 import HabitContext from "./habitContext";
 import habitReducer from "./habitReducer";
-import { SET_STATUS, ADD_HABITS, REMOVE_HABITS } from "./types";
+import { SET_STATUS, ADD_HABITS, REMOVE_HABITS } from "../types";
 
 const HabitState = props => {
   const initialState = {

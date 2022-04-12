@@ -1,6 +1,6 @@
 import { React, useState, useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
-import HabitContext from '../../context/habitContext';
+import HabitContext from '../../context/habit/habitContext';
 import Checkboxes from './Checkboxes';
 
 const CheckboxForm = () => {  

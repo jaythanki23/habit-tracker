@@ -1,4 +1,4 @@
-import { SET_STATUS, ADD_HABITS, REMOVE_HABITS } from "./types";
+import { SET_STATUS, ADD_HABITS, REMOVE_HABITS } from "../types";
 
 const habitReducer = (state, action) => {
   switch(action.type) {

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import HabitContext from "../../context/habitContext";
+import HabitContext from "../../context/habit/habitContext";
 
 const Checkboxes = ({ name, status }) => {
   const { setStatus } = useContext(HabitContext);

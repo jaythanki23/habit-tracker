@@ -1,5 +1,5 @@
 import { React, useContext } from 'react'
-import HabitContext from '../../context/habitContext';
+import HabitContext from '../../context/habit/habitContext';
 import Habit from './Habit';
 
 const DashboardHabits = () => {
