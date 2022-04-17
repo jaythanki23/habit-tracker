@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 import HabitContext from "./habitContext";
 import habitReducer from "./habitReducer";
-import { SET_STATUS, ADD_HABITS, REMOVE_HABITS } from "../types";
+import { SET_STATUS, ADD_HABITS, REMOVE_HABITS, SET_DATE } from "../types";
 
 const HabitState = props => {
   const initialState = {
@@ -34,7 +34,12 @@ const HabitState = props => {
         name: 'journaling',
         status: false
       }
-    ]
+    ],
+    userHabits: [],
+    day: '',
+    month: '',
+    date: ''
+
   }
 
   const [state, dispatch] = useReducer(habitReducer, initialState);
@@ -51,11 +56,43 @@ const HabitState = props => {
 
   // Remove Habits
 
+
+  // set Current Date
+  const setDateTime = () => {
+    // Get date
+    const d = new Date();
+    
+    // Get Day
+    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const day = weekday[d.getDay()];
+
+    // Get Month
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+    const month = months[d.getMonth()];
+
+    // Get Day of the month
+    const date = d.getDate();
+
+    console.log(month);
+
+
+    dispatch({
+      type: SET_DATE,
+      payload: {day, month, date}
+    })
+  }
+
   return <HabitContext.Provider
     value={{
       habits: state.habits,
+      userHabits: state.userHabits,
+      day: state.day,
+      month: state.month,
+      date: state.date,
       setStatus,
-      addHabit
+      addHabit,
+      setDateTime
     }}
   >
     {props.children}

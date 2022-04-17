@@ -20,7 +20,7 @@ const CheckboxForm = () => {
   }
 
   const onSubmit = () => {
-    navigate('/dashboard');
+    navigate('/');
   }
 
   return (

@@ -52,10 +52,10 @@ const register = asyncHandler(async (req, res) => {
 const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  // if(!email || !password) {
-  //   res.status(400);
-  //   throw new Error('Please add all the fields');
-  // }
+  if(!email || !password) {
+    res.status(400);
+    throw new Error('Please add all the fields');
+  }
 
   // get the user
   const user = await User.findOne({email});

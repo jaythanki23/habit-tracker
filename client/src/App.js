@@ -1,16 +1,27 @@
+import { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Navbar from './components/layout/Navbar';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
-import Dashboard from './components/dashboard/Dashboard';
 import HabitState from './context/habit/HabitState';
 import AuthState from './context/auth/AuthState';
+import PrivateRoute from './components/routing/PrivateRoute';
+
+// import HabitContext from './context/habit/habitContext';
+
 
 import './App.css';
 
+
 function App() {
+  // const { setDateTime } = useContext(HabitContext);
+
+  // useEffect(() => {
+  //   setDateTime();
+  // }, []);
+
   return (
     <AuthState>
       <HabitState>
@@ -19,9 +30,10 @@ function App() {
             <div className='container'>
               <Navbar />
               <Routes>
-                <Route exact path='/' element={<Home />} />
+                <Route exact path='/' element={<PrivateRoute>
+                                                  <Home />
+                                                </PrivateRoute>} />
                 <Route exact path='/about' element={<About />} />
-                <Route exact path='/dashboard' element={<Dashboard />} />
                 <Route exact path='/register' element={<Register />} />
                 <Route exact path='/login' element={<Login />} />
               </Routes>

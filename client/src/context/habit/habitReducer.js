@@ -1,4 +1,4 @@
-import { SET_STATUS, ADD_HABITS, REMOVE_HABITS } from "../types";
+import { SET_STATUS, ADD_HABITS, REMOVE_HABITS, SET_DATE } from "../types";
 
 const habitReducer = (state, action) => {
   switch(action.type) {
@@ -11,6 +11,13 @@ const habitReducer = (state, action) => {
       return {
         ...state,
         habits: [...state.habits, action.payload]
+      };
+    case SET_DATE:
+      return {
+        ...state,
+        day: action.day,
+        month: action.month,
+        date: action.date
       }
     default:
       return state;
