@@ -2,11 +2,13 @@ import axios from 'axios';
 import { useReducer } from 'react';
 import AuthContext from './authContext';
 import authReducer from './authReducer';
-import { REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from '../types';
+import setAuthToken from '../../utils/setAuthToken';
+import { REGISTER_SUCCESS, REGISTER_FAIL, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, USER_LOADED, AUTH_ERROR } from '../types';
 
 
 const AuthState = props => {
   const initialState = {
+    token: null,
     user: null,
     isAuthenticated: false,
     error: null
@@ -31,6 +33,9 @@ const AuthState = props => {
         payload: res.data
       })
 
+      loadUser();
+
+
     } catch (error) {
       dispatch({
         type: REGISTER_FAIL,
@@ -54,6 +59,9 @@ const AuthState = props => {
         type: LOGIN_SUCCESS,
         payload: res.data
       })
+
+      loadUser();
+
     } catch (error) {
       dispatch({
         type: LOGIN_FAIL,
@@ -65,17 +73,41 @@ const AuthState = props => {
   // Logout
   const logout = () => { dispatch({ type: LOGOUT }) }
 
+  // Load User
+  const loadUser = async () => {
+    if(localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    
+    try {
+      const res = await axios.get('/api/users/me');
+
+      dispatch({
+        type: USER_LOADED,
+        payload: res.data
+      });
+
+    } catch (error) {
+      dispatch({
+        type: AUTH_ERROR
+      })
+    }
+
+  }
+
 
 
   return (
     <AuthContext.Provider 
       value={{
+        token: state.token,
         user: state.user,
         isAuthenticated: state.isAuthenticated,
         error: state.error,
         register,
         login,
-        logout
+        logout,
+        loadUser
       }}
     >
       {props.children}

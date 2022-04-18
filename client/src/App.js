@@ -5,22 +5,19 @@ import About from './components/pages/About';
 import Navbar from './components/layout/Navbar';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import setAuthToken from './utils/setAuthToken';
+
 import HabitState from './context/habit/HabitState';
 import AuthState from './context/auth/AuthState';
 import PrivateRoute from './components/routing/PrivateRoute';
 
-// import HabitContext from './context/habit/habitContext';
-
-
 import './App.css';
 
+if(localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 function App() {
-  // const { setDateTime } = useContext(HabitContext);
-
-  // useEffect(() => {
-  //   setDateTime();
-  // }, []);
 
   return (
     <AuthState>

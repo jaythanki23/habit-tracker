@@ -36,9 +36,10 @@ const HabitState = props => {
       }
     ],
     userHabits: [],
-    day: '',
-    month: '',
-    date: ''
+    day: null,
+    month: null,
+    date: null,
+    dateTime: new Date()
 
   }
 
@@ -58,10 +59,11 @@ const HabitState = props => {
 
 
   // set Current Date
-  const setDateTime = () => {
+  const setDateTime = (data) => {
+
     // Get date
     const d = new Date();
-    
+      
     // Get Day
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const day = weekday[d.getDay()];
@@ -75,11 +77,10 @@ const HabitState = props => {
     const date = d.getDate();
 
     console.log(month);
-
-
+    
     dispatch({
       type: SET_DATE,
-      payload: {day, month, date}
+      payload: { day, month, date }
     })
   }
 
@@ -90,6 +91,7 @@ const HabitState = props => {
       day: state.day,
       month: state.month,
       date: state.date,
+      dateTime: state.dateTime,
       setStatus,
       addHabit,
       setDateTime

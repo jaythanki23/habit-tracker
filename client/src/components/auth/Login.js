@@ -11,11 +11,10 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // setDateTime();
     if(isAuthenticated) {
       navigate('/');
     }
-  }, [setDateTime, isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate]);
 
   const [user, setUser] = useState({
     email: '',
@@ -29,6 +28,7 @@ const Login = () => {
   const onSubmit = e => {
     e.preventDefault();
     // console.log(user);
+    setDateTime();
     login(user);
   }
 

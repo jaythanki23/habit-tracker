@@ -15,9 +15,9 @@ const habitReducer = (state, action) => {
     case SET_DATE:
       return {
         ...state,
-        day: action.day,
-        month: action.month,
-        date: action.date
+        day: action.payload.day,
+        month: action.payload.month,
+        date: action.payload.date
       }
     default:
       return state;
