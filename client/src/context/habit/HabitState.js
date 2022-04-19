@@ -1,7 +1,9 @@
+import axios from "axios";
 import { useReducer } from "react";
 import HabitContext from "./habitContext";
 import habitReducer from "./habitReducer";
-import { SET_STATUS, ADD_HABITS, REMOVE_HABITS, SET_DATE } from "../types";
+import { SET_STATUS, ADD_HABITS, REMOVE_HABITS, SET_DATE, ADD_USER_HABITS, HABIT_ERROR } from "../types";
+
 
 const HabitState = props => {
   const initialState = {
@@ -84,6 +86,41 @@ const HabitState = props => {
     })
   }
 
+
+  // Post Habits
+  const postHabit = async () => {
+    const habits = state.habits.filter(habit => habit.status === true).map(({ name }) => ({
+      name,
+      duration: 0,
+      dateTime: state.dateTime,
+      day: state.day,
+      month: state.month,
+      date: state.date,
+    }));
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    try {
+      const res = await axios.post('/api/habits', habits, config);
+
+      dispatch({
+        type: ADD_USER_HABITS,
+        payload: res.data
+      });
+
+    } catch (error) {
+      dispatch({
+        type: HABIT_ERROR,
+        payload: error.response.data.message
+      })
+    }
+
+  }
+
   return <HabitContext.Provider
     value={{
       habits: state.habits,
@@ -94,7 +131,8 @@ const HabitState = props => {
       dateTime: state.dateTime,
       setStatus,
       addHabit,
-      setDateTime
+      setDateTime,
+      postHabit
     }}
   >
     {props.children}

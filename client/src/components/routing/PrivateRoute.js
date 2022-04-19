@@ -6,8 +6,10 @@ import { Navigate } from "react-router-dom";
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated } = useContext(AuthContext);
 
+  
+
   return (
-      !isAuthenticated ? (<Navigate to='/login' />) : (children)
+    !localStorage.token && !isAuthenticated ? (<Navigate to='/login' />) : (children)
   );
 };
 

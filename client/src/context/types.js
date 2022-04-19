@@ -1,7 +1,10 @@
 export const SET_STATUS = 'SET_STATUS';
-export const ADD_HABITS = 'SET_HABITS';
+export const ADD_HABITS = 'ADD_HABITS';
 export const REMOVE_HABITS = 'REMOVE_HABITS';
 export const SET_DATE = 'SET_DATE';
+export const ADD_USER_HABITS = 'ADD_USER_HABITS';
+export const HABIT_ERROR = 'HABIT_ERROR';
+
 
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAIL = 'REGISTER_FAIL';

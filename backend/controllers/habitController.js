@@ -19,19 +19,29 @@ const createHabits = asyncHandler(async (req, res) => {
     throw new Error('Please add a text field');
   }
 
-  const { name, duration, dateTime, day, month, date } = req.body;
+  // const { name, duration, dateTime, day, month, date } = req.body;
   
-  const habit = await Habit.create({
-    name,
-    duration,
-    dateTime,
-    day,
-    month,
-    date,
-    user: req.user.id
-  });
+  // const habit = await Habit.create({
+  //   name,
+  //   duration,
+  //   dateTime,
+  //   day,
+  //   month,
+  //   date,
+  //   user: req.user.id
+  // });
 
-  res.status(200).json(habit);
+  // add user id in each obj of body
+  const data = req.body.map(({ ...habit }) => ({ ...habit, user: req.user.id }))
+  try {
+    const habits = await Habit.insertMany(data);
+
+    res.status(200).json(habits);  
+  } catch (error) {
+    res.status(500)
+    throw new Error('Server Error');
+  }
+  
 });
 
 

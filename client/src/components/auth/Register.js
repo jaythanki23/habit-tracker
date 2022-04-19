@@ -33,7 +33,6 @@ const Register = () => {
   }
   const onSubmit = e => {
     e.preventDefault();
-    console.log(user);
     setDateTime();
     register(user);
 

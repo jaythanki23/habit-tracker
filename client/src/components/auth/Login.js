@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../context/auth/authContext';
-import HabitContext from '../../context/habit/habitContext';
+// import HabitContext from '../../context/habit/habitContext';
 
 const Login = () => {
 
   const { login, isAuthenticated, error } = useContext(AuthContext);
-  const { setDateTime } = useContext(HabitContext);
+  // const { setDateTime } = useContext(HabitContext);
 
   const navigate = useNavigate();
 
@@ -28,7 +28,7 @@ const Login = () => {
   const onSubmit = e => {
     e.preventDefault();
     // console.log(user);
-    setDateTime();
+    // setDateTime();
     login(user);
   }
 

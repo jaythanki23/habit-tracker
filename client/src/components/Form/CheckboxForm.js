@@ -5,7 +5,7 @@ import Checkboxes from './Checkboxes';
 
 const CheckboxForm = () => {  
   const [text, setText] = useState('');
-  const { habits, addHabit } = useContext(HabitContext);
+  const { habits, addHabit, postHabit } = useContext(HabitContext);
 
   const navigate = useNavigate();
 
@@ -20,6 +20,7 @@ const CheckboxForm = () => {
   }
 
   const onSubmit = () => {
+    postHabit();
     navigate('/');
   }
 
