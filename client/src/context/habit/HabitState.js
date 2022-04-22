@@ -2,7 +2,7 @@ import axios from "axios";
 import { useReducer } from "react";
 import HabitContext from "./habitContext";
 import habitReducer from "./habitReducer";
-import { SET_STATUS, ADD_HABITS, REMOVE_HABITS, SET_DATE, ADD_USER_HABITS, HABIT_ERROR } from "../types";
+import { SET_STATUS, ADD_HABITS, REMOVE_HABITS, SET_DATE, ADD_USER_HABITS, GET_USER_HABITS, UPDATE_HABIT, HABIT_ERROR } from "../types";
 
 
 const HabitState = props => {
@@ -41,7 +41,8 @@ const HabitState = props => {
     day: null,
     month: null,
     date: null,
-    dateTime: new Date()
+    dateTime: new Date(),
+    error: null
 
   }
 
@@ -57,7 +58,18 @@ const HabitState = props => {
     dispatch({ type: ADD_HABITS, payload: {name: name, status: true} })
   }
 
-  // Remove Habits
+  // Delete Habits
+  const deleteHabit = (id) => {
+    try {
+      axios.delete(`/api/habits/${id}`);
+    } catch (error) {
+      dispatch({
+        type: HABIT_ERROR,
+        payload: error.response.data.message
+      });
+    }
+  };
+
 
 
   // set Current Date
@@ -118,7 +130,55 @@ const HabitState = props => {
         payload: error.response.data.message
       })
     }
+  }
 
+  const getHabit = async () => {
+    try {
+      const res = await axios.get('/api/habits');
+
+      dispatch({
+        type: GET_USER_HABITS,
+        payload: res.data
+      })
+      
+    } catch (error) {
+      dispatch({
+        type: HABIT_ERROR,
+        payload: error.response.data.message
+      })
+    }
+  }
+
+  // Update Habit
+  const updateHabit = async data => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const updatedHabit = {
+      duration: data.duration,
+      day: state.day,
+      month: state.month,
+      date: state.date,
+      dateTime: state.dateTime
+    }
+
+    try {
+      const res = await axios.put(`/api/habits/${data.id}`, updatedHabit, config)
+
+      dispatch({
+        type: UPDATE_HABIT,
+        payload: res.data
+      })
+
+    } catch (error) {
+      dispatch({
+        type: HABIT_ERROR,
+        payload: error.response.data.message
+      })
+    }
   }
 
   return <HabitContext.Provider
@@ -129,10 +189,14 @@ const HabitState = props => {
       month: state.month,
       date: state.date,
       dateTime: state.dateTime,
+      error: state.error,
       setStatus,
       addHabit,
       setDateTime,
-      postHabit
+      postHabit,
+      getHabit,
+      updateHabit,
+      deleteHabit
     }}
   >
     {props.children}

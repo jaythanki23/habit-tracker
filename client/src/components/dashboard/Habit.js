@@ -1,10 +1,13 @@
-import { React, useState} from 'react';
+import { React, useContext, useState} from 'react';
+import HabitContext from '../../context/habit/habitContext';
 
 
-const Habit = ({ name }) => {
+const Habit = ({ id, name }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [duration, setDuration] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const { updateHabit, deleteHabit } = useContext(HabitContext);
   
 
   const onChecked = (e) => {
@@ -16,13 +19,24 @@ const Habit = ({ name }) => {
   }
 
   const onSubmit = () => {
-    console.log({
-      name: name,
-      status: isChecked,
-      duration: duration
-    })
+    // console.log({
+    //   name: name,
+    //   status: isChecked,
+    //   duration: duration
+    // })
+    updateHabit({
+      id,
+      duration
+    });
     setIsSubmitted(true);
   }
+
+  const onClick = () => {
+    deleteHabit(id);
+    setIsSubmitted(true);
+  }
+
+
 
   return (
     <>
@@ -32,6 +46,7 @@ const Habit = ({ name }) => {
           <td><input type='checkbox' name='habit' onChange={onChecked} /></td>
           <td><input type='number' className='border border-2 rounded' id='duration' onChange={onChange} style={{'width': '100px'}} /></td>
           <td><button type='button' className='btn btn-success' onClick={onSubmit} disabled={!isChecked}>Submit</button></td>
+          <td><button type='button' className='btn btn-danger' onClick={onClick}><i class="bi bi-x-lg" style={{'color': 'black'}}></i></button></td>
         </tr>
       }
     </>

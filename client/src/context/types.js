@@ -3,6 +3,8 @@ export const ADD_HABITS = 'ADD_HABITS';
 export const REMOVE_HABITS = 'REMOVE_HABITS';
 export const SET_DATE = 'SET_DATE';
 export const ADD_USER_HABITS = 'ADD_USER_HABITS';
+export const GET_USER_HABITS = 'GET_USER_HABITS';
+export const UPDATE_HABIT = 'UPDATE_HABIT';
 export const HABIT_ERROR = 'HABIT_ERROR';
 
 

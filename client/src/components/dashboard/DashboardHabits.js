@@ -3,9 +3,9 @@ import HabitContext from '../../context/habit/habitContext';
 import Habit from './Habit';
 
 const DashboardHabits = () => {
-  const { habits } = useContext(HabitContext);
+  const { userHabits } = useContext(HabitContext);
 
-  const myHabits = habits.filter(habit => habit.status === true);
+  // const myHabits = habits.filter(habit => habit.status === true);
 
   return (
     <div className='m-4 p-4'>
@@ -18,9 +18,10 @@ const DashboardHabits = () => {
           </tr>
         </thead>
         <tbody>
-          {myHabits.map(habit => <Habit key={habit.name} name={habit.name} />)}
+          {userHabits.map(habit => <Habit key={habit._id} id={habit._id} name={habit.name} />)}
         </tbody>
       </table>
+      {/* <button className='btn btn-primary'>Add one more?</button> */}
     </div>
   )
 }

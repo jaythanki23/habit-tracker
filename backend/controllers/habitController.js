@@ -44,5 +44,38 @@ const createHabits = asyncHandler(async (req, res) => {
   
 });
 
+// @desc Update Habit
+// @route /api/habits/:id
+// @access Private
+const updateHabit = asyncHandler(async (req, res) => {
+  const habit = await Habit.findById(req.params.id);
 
-export { getHabits, createHabits };
+  if(!habit) {
+    res.status(400);
+    throw new Error('Habit not found');
+  }
+
+  const updatedHabit = await Habit.findByIdAndUpdate(req.params.id, req.body, { new:true });
+
+  res.status(200).json(updatedHabit);
+});
+
+// @desc Delete Habit
+// @route /api/habits/:id
+// @access Private
+const deleteHabit = asyncHandler(async (req, res) => {
+  const habit = await Habit.findById(req.params.id);
+
+  if(!habit) {
+    res.status(400);
+    throw new Error('Habit not found');
+  }
+
+  await habit.remove();
+
+  res.status(200).json({ id: req.params.id });
+
+})
+
+
+export { getHabits, createHabits, updateHabit, deleteHabit };

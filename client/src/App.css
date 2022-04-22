@@ -5,24 +5,11 @@
   font-family: 'Poppins', sans-serif;
 }
 
-/* .container {
-  background-color: #f9f8f4;
-} */
 
-/* * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-} */
-
-/* body {
-  font-size: 1rem;
-  line-height: 1.6;
-  background-color: #f9f8f4;
-} */
 
 html, body {
   margin: 0;
   height: 100%;
+  width: 100%;
   background-color: #f9f8f4;
 }
