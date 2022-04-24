@@ -26,6 +26,12 @@ const Navbar = () => {
         <p className='nav-link' style={{'color': 'white'}}>Hello, {user && user.name}</p>
       </li>
       <li className='nav-item'>
+        <Link to='/' className='nav-link' >Home</Link>
+      </li>
+      <li className='nav-item'>
+        <Link to='/progress' className='nav-link' >Progress</Link>
+      </li>
+      <li className='nav-item'>
         <a href='#' className='nav-link' onClick={onClick} ><span>Logout</span></a>
       </li>
     </>

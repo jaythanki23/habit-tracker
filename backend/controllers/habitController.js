@@ -55,7 +55,11 @@ const updateHabit = asyncHandler(async (req, res) => {
     throw new Error('Habit not found');
   }
 
-  const updatedHabit = await Habit.findByIdAndUpdate(req.params.id, req.body, { new:true });
+  const { duration, day, month, date, dateTime } = req.body
+
+  const data = { $push: { duration, day, month, date, date, dateTime } }
+
+  const updatedHabit = await Habit.findByIdAndUpdate(req.params.id, data);
 
   res.status(200).json(updatedHabit);
 });

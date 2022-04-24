@@ -10,20 +10,20 @@ const habitSchema = mongoose.Schema({
     required: true
   },
   duration: {
-    type: Number,
+    type: Array,
     required: true 
   },
   dateTime: {
-    type: String,
+    type: Array,
   },
   day: {
-    type: String
+    type: Array
   },
   month: {
-    type: String
+    type: Array
   },
   date: {
-    type: String
+    type: Array
   }
 });
 

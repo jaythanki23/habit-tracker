@@ -2,7 +2,7 @@ import axios from "axios";
 import { useReducer } from "react";
 import HabitContext from "./habitContext";
 import habitReducer from "./habitReducer";
-import { SET_STATUS, ADD_HABITS, REMOVE_HABITS, SET_DATE, ADD_USER_HABITS, GET_USER_HABITS, UPDATE_HABIT, HABIT_ERROR } from "../types";
+import { SET_STATUS, ADD_HABITS, REMOVE_HABITS, SET_DATE, ADD_USER_HABITS, GET_USER_HABITS, UPDATE_HABIT, HABIT_ERROR, CLEAR_STATUS } from "../types";
 
 
 const HabitState = props => {
@@ -62,6 +62,8 @@ const HabitState = props => {
   const deleteHabit = (id) => {
     try {
       axios.delete(`/api/habits/${id}`);
+      clearStatus();
+      getHabit();
     } catch (error) {
       dispatch({
         type: HABIT_ERROR,
@@ -100,14 +102,19 @@ const HabitState = props => {
 
 
   // Post Habits
-  const postHabit = async () => {
+  const postHabit = async (name) => {
+    if(name) {
+      state.habits.push({ name, status:true });
+    }
+
+
     const habits = state.habits.filter(habit => habit.status === true).map(({ name }) => ({
       name,
-      duration: 0,
-      dateTime: state.dateTime,
-      day: state.day,
-      month: state.month,
-      date: state.date,
+      duration: [],
+      dateTime: [],
+      day: [],
+      month: [],
+      date: [],
     }));
 
     const config = {
@@ -119,10 +126,13 @@ const HabitState = props => {
     try {
       const res = await axios.post('/api/habits', habits, config);
 
-      dispatch({
-        type: ADD_USER_HABITS,
-        payload: res.data
-      });
+      // dispatch({
+      //   type: ADD_USER_HABITS,
+      //   payload: res.data
+      // });
+
+      clearStatus();
+      getHabit();
 
     } catch (error) {
       dispatch({
@@ -132,9 +142,12 @@ const HabitState = props => {
     }
   }
 
+  // Get Habits
   const getHabit = async () => {
     try {
       const res = await axios.get('/api/habits');
+
+      // res.data.forEach(habit => habit['isSubmitted'] = false);
 
       dispatch({
         type: GET_USER_HABITS,
@@ -158,10 +171,10 @@ const HabitState = props => {
     }
 
     const updatedHabit = {
-      duration: data.duration,
+      duration: parseInt(data.duration),
       day: state.day,
       month: state.month,
-      date: state.date,
+      date: parseInt(state.date),
       dateTime: state.dateTime
     }
 
@@ -179,6 +192,11 @@ const HabitState = props => {
         payload: error.response.data.message
       })
     }
+  }
+
+  // clear status
+  const clearStatus = () => {
+    state.habits.forEach(habit => habit.status = false);
   }
 
   return <HabitContext.Provider

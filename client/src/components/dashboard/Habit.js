@@ -46,7 +46,7 @@ const Habit = ({ id, name }) => {
           <td><input type='checkbox' name='habit' onChange={onChecked} /></td>
           <td><input type='number' className='border border-2 rounded' id='duration' onChange={onChange} style={{'width': '100px'}} /></td>
           <td><button type='button' className='btn btn-success' onClick={onSubmit} disabled={!isChecked}>Submit</button></td>
-          <td><button type='button' className='btn btn-danger' onClick={onClick}><i class="bi bi-x-lg" style={{'color': 'black'}}></i></button></td>
+          <td><button type='button' className='btn btn-danger' onClick={onClick}><i className="bi bi-x-lg" style={{'color': 'black'}}></i></button></td>
         </tr>
       }
     </>
