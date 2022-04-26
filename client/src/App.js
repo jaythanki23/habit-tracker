@@ -25,8 +25,8 @@ function App() {
       <HabitState>
         <Router>
           <div className='App'>
+            <Navbar />
             <div className='container'>
-              <Navbar />
               <Routes>
                 <Route exact path='/' element={<PrivateRoute>
                                                   <Home />

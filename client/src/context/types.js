@@ -6,6 +6,8 @@ export const ADD_USER_HABITS = 'ADD_USER_HABITS';
 export const GET_USER_HABITS = 'GET_USER_HABITS';
 export const UPDATE_HABIT = 'UPDATE_HABIT';
 export const HABIT_ERROR = 'HABIT_ERROR';
+export const SET_ERROR = 'SET_ERROR';
+export const CLEAR_ERROR = 'CLEAR_ERROR';
 
 
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';

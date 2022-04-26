@@ -1,4 +1,4 @@
-import { SET_STATUS, ADD_HABITS, REMOVE_HABITS, SET_DATE, ADD_USER_HABITS, GET_USER_HABITS, UPDATE_HABIT, HABIT_ERROR } from "../types";
+import { SET_STATUS, ADD_HABITS, REMOVE_HABITS, SET_DATE, ADD_USER_HABITS, GET_USER_HABITS, UPDATE_HABIT, HABIT_ERROR, SET_ERROR, CLEAR_ERROR } from "../types";
 
 const habitReducer = (state, action) => {
   switch(action.type) {
@@ -35,9 +35,15 @@ const habitReducer = (state, action) => {
         userHabits: state.userHabits.map(habit => habit._id === action.payload._id ? action.payload : habit)
       }
     case HABIT_ERROR:
+    case SET_ERROR:
       return {
         ...state,
         error: action.payload
+      }
+    case CLEAR_ERROR:
+      return {
+        ...state,
+        error: null
       }
     default:
       return state;

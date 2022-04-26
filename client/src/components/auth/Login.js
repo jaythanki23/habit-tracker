@@ -38,18 +38,19 @@ const Login = () => {
                   {error}
                 </div>
       }
-      <section className="vh-100" style={{"backgroundColor": "#9A616D"}}>
-        <div className="container py-5 h-100">
-          <div className="row d-flex justify-content-center align-items-center h-100">
+      <section className="vh-100" style={{"backgroundColor": "#eee"}}>
+        <div className="container h-100">
+          {/* <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col col-xl-10">
               <div className="card" style={{"borderRadius": "1rem"}}>
-                <div className="row g-0">
-                  <div className="col-md-6 col-lg-5 d-none d-md-block">
-                    <img src="https://images.unsplash.com/photo-1579762593217-46655e4e7efc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2117&q=80"
-                      alt="login form" style={{"height": "500px", "width": "400px"}}/>
-                  </div>
                   <div className="col-md-6 col-lg-7 d-flex align-items-center">
-                    <div className="card-body p-4 p-lg-5 text-black">
+                    <div className="card-body p-4 p-lg-5 text-black"> */}
+
+          <div className="row d-flex justify-content-center align-items-center h-100">
+            <div className="col-12 col-md-9 col-lg-7 col-xl-6">
+              <div className="card" style={{"borderRadius": "15px"}}>
+                <div className="card-body p-5">
+                  <h1 className="text-center mb-5">Sign In</h1>
 
                       <form onSubmit={onSubmit}>
 
@@ -58,7 +59,7 @@ const Login = () => {
                           <span className="h1 fw-bold mb-0">Logo</span>
                         </div> */}
 
-                        <h5 className="fw-normal mb-3 pb-3 fs-2" style={{"letterSpacing": "1px"}}>Sign in</h5>
+                        {/* <h5 className="fw-normal mb-3 pb-3 fs-2" style={{"letterSpacing": "1px"}}>Sign in</h5> */}
 
                         <div className="form-outline mb-4">
                           <input type="email" name='email' value={email} id="form2Example17" className="form-control form-control-lg" placeholder='Email Address' onChange={onChange} required />
@@ -71,7 +72,7 @@ const Login = () => {
                         </div>
 
                         <div className="pt-1 mb-4">
-                          <button className="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                          <button className="btn btn-primary btn-lg btn-block" type="submit">Login</button>
                         </div>
                       </form>
 
@@ -80,8 +81,6 @@ const Login = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
       </section>
     </div>
   )

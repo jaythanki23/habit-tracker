@@ -2,7 +2,7 @@ import axios from "axios";
 import { useReducer } from "react";
 import HabitContext from "./habitContext";
 import habitReducer from "./habitReducer";
-import { SET_STATUS, ADD_HABITS, REMOVE_HABITS, SET_DATE, ADD_USER_HABITS, GET_USER_HABITS, UPDATE_HABIT, HABIT_ERROR, CLEAR_STATUS } from "../types";
+import { SET_STATUS, ADD_HABITS, REMOVE_HABITS, SET_DATE, ADD_USER_HABITS, GET_USER_HABITS, UPDATE_HABIT, HABIT_ERROR, CLEAR_STATUS, SET_ERROR, CLEAR_ERROR } from "../types";
 
 
 const HabitState = props => {
@@ -199,6 +199,12 @@ const HabitState = props => {
     state.habits.forEach(habit => habit.status = false);
   }
 
+  const setError = (msg) => {
+    dispatch({ type: SET_ERROR, payload: msg });
+
+    setTimeout(() => dispatch({ type: CLEAR_ERROR }), 5000);
+  }
+
   return <HabitContext.Provider
     value={{
       habits: state.habits,
@@ -214,7 +220,8 @@ const HabitState = props => {
       postHabit,
       getHabit,
       updateHabit,
-      deleteHabit
+      deleteHabit,
+      setError
     }}
   >
     {props.children}
