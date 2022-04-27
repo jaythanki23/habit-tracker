@@ -42,6 +42,7 @@ const HabitState = props => {
     month: null,
     date: null,
     dateTime: new Date(),
+    months: ["January","February","March","April","May","June","July","August","September","October","November","December"],
     error: null
 
   }
