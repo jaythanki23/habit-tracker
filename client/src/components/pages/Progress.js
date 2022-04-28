@@ -1,15 +1,28 @@
 import React, { useContext } from 'react';
 // import Plot from 'react-plotly.js';
-import Plotly from 'plotly.js-basic-dist';
-import createPlotlyComponent from 'react-plotly.js/factory';
 import AuthContext from '../../context/auth/authContext';
 import HabitContext from '../../context/habit/habitContext';
+import Chart from '../Chart';
 
-const Plot = createPlotlyComponent(Plotly);
 
 const Progress = () => {
   const { isAuthenticated } = useContext(AuthContext);
-  const { date, day, month, months } = useContext(HabitContext);
+  const { date, month, months, userHabits } = useContext(HabitContext);
+
+  const monthObj = {
+    'January': 31,
+    'February': 28,
+    'March': 31,
+    'April': 30,
+    'May': 31,
+    'June': 30,
+    'July': 31,
+    'August': 31,
+    'September': 30,
+    'October': 31,
+    'November': 30,
+    'December': 31
+  };
 
   const curr = new Date();
 
@@ -17,28 +30,20 @@ const Progress = () => {
 
   let lastDay = firstDay + 6;
 
-  let currMonth  = curr.getMonth();
+  let nextMonth = month;
 
-  // if((currMonth + 1) % 2 === 0) {
-
-  // }
-
+  if(lastDay > monthObj[month]) {
+    lastDay = lastDay - monthObj[month];
+    nextMonth = months[months.indexOf(month) + 1];
+  }
 
   return (
     isAuthenticated ? (
-      <div className='container border border-dark mt-5 p-3 w-auto vh-100'>
+      <div className='container border border-dark mt-5 p-3 w-auto'>
         <div className='d-flex flex-column align-items-center justify-content-center gap-5 border border-dark'>
-          <div className='fs-1'>{month} {firstDay} - {month} {firstDay + 6}</div>
-          <div>
-            <Plot data={[
-              {
-                x: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                y: [20, 30, 0, 50, 20, 35, 0],
-                type: 'bar'
-              }
-              ]}
-              layout={{ title: 'My first plot' }} 
-            />
+          <div className='fs-1'>{month} {firstDay} - {nextMonth} {lastDay}</div>
+          <div className='d-flex flex-column align-items-center justify-content-center gap-5'>
+            {userHabits.map(habit => <Chart key={habit._id} duration={habit.duration} date={habit.date} name={habit.name} firstDay={firstDay} />)}
           </div>
         </div>
       </div>

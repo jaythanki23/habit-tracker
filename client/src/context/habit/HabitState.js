@@ -214,6 +214,7 @@ const HabitState = props => {
       month: state.month,
       date: state.date,
       dateTime: state.dateTime,
+      months: state.months,
       error: state.error,
       setStatus,
       addHabit,
