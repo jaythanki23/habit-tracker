@@ -10,17 +10,29 @@ const Chart = ({ duration, date, name, firstDay }) => {
   let start = date.lastIndexOf(firstDay);
   // let end = date.lastIndexOf(date.length - 1);
 
-  let diff = date[date.length - 1] - firstDay;
-
+  // const x = duratio
   const y = duration.slice(start);
+
+  // let i = start;
+  // let diff = 0;
+  // while(i < date.length) {
+  //   if(date[i+1] - date[i] > 1) {
+      
+  //   }
+  // }
+
+  // let diff = date[date.length - 1] - firstDay;
+
+  // const y = duration.slice(start);
   
   // const zeros = new Array(diff-1).fill(0);
 
-  let i = 1;
-  while(i < diff) {
-    y.splice(i, 0, 0);
-    i++;
-  }
+
+  // let i = 1;
+  // while(i < diff) {
+  //   y.splice(i, 0, 0);
+  //   i++;
+  // }
 
 
 

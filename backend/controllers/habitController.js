@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Habit from "../model/habitModel.js";
+import Week from "../model/weekModel.js";
 
 // @desc Get habits
 // @route /api/habits
@@ -19,24 +20,21 @@ const createHabits = asyncHandler(async (req, res) => {
     throw new Error('Please add a text field');
   }
 
-  // const { name, duration, dateTime, day, month, date } = req.body;
+  const { name, day, month, date, dateTime } = req.body;
   
-  // const habit = await Habit.create({
-  //   name,
-  //   duration,
-  //   dateTime,
-  //   day,
-  //   month,
-  //   date,
-  //   user: req.user.id
-  // });
-
   // add user id in each obj of body
-  const data = req.body.map(({ ...habit }) => ({ ...habit, user: req.user.id }))
+  // const data = req.body.map(({ ...habit }) => ({ ...habit, user: req.user.id }))
   try {
-    const habits = await Habit.insertMany(data);
+    const habit = await Habit.create({
+      name,
+      day,
+      month,
+      date,
+      dateTime,
+      user: req.user.id
+    });
 
-    res.status(200).json(habits);  
+    res.status(200).json(habit);  
   } catch (error) {
     res.status(500)
     throw new Error('Server Error');
@@ -55,13 +53,61 @@ const updateHabit = asyncHandler(async (req, res) => {
     throw new Error('Habit not found');
   }
 
-  const { duration, day, month, date, dateTime } = req.body
+  const { day, duration, month, year } = req.body;
 
-  const data = { $push: { duration, day, month, date, date, dateTime } }
+  const { _id } = habit;
 
-  const updatedHabit = await Habit.findByIdAndUpdate(req.params.id, data);
+  // console.log(_id);
 
-  res.status(200).json(updatedHabit);
+  const [first, last] = getDays();
+
+  let week = await Week.findOne({ habit: _id, year, month, from: { $gt: first-1 }, to: { $lt: last+1 }  })
+
+  if(!week) {
+    try {
+      const newWeek = await Week.create({
+        year,
+        month,
+        from: first,
+        to: last,
+        dayDuration: {
+          'Mon': 0,
+          'Tue': 0,
+          'Wed': 0,
+          'Thu': 0,
+          'Fri': 0,
+          'Sat': 0,
+          'Sun': 0
+        },
+        habit: _id
+      });
+      // console.log(newWeek);
+      res.status(200).json(newWeek);
+      
+    } catch (error) {
+      res.status(500)
+      throw new Error('Server Error');
+    }
+
+  } else {
+    try {
+      week = await Week.findOneAndUpdate({ habit: _id }, { $set: { [`dayDuration.${day}`]: duration } }); 
+      res.status(200).json(week);
+      
+    } catch (error) {
+      res.status(500)
+      throw new Error('Server Error');
+    }
+  }
+
+
+  // const { duration, day, month, date, dateTime } = req.body
+
+  // const data = { $push: { duration, day, month, date, date, dateTime } }
+
+  // const updatedHabit = await Habit.findByIdAndUpdate(req.params.id, data);
+
+  // res.status(200).json(updatedHabit);
 });
 
 // @desc Delete Habit
@@ -79,7 +125,25 @@ const deleteHabit = asyncHandler(async (req, res) => {
 
   res.status(200).json({ id: req.params.id });
 
-})
+});
+
+const getDays = () => {
+  const curr = new Date();
+  
+  let first = curr.getDate() - curr.getDay() + 1;
+  
+  let last = first + 6;
+  
+  let firstDay = new Date(curr.setDate(first)).toUTCString();
+  
+  let lastDay = new Date(curr.setDate(curr.getDate()+6)).toUTCString();
+    
+  firstDay = parseInt(firstDay.slice(5, 7));
+
+  lastDay = parseInt(lastDay.slice(5, 7));  
+  
+  return [firstDay, lastDay];
+}
 
 
 export { getHabits, createHabits, updateHabit, deleteHabit };

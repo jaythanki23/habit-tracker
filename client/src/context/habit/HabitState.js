@@ -42,7 +42,6 @@ const HabitState = props => {
     month: null,
     date: null,
     dateTime: new Date(),
-    months: ["January","February","March","April","May","June","July","August","September","October","November","December"],
     error: null
 
   }
@@ -82,7 +81,7 @@ const HabitState = props => {
     const d = new Date();
       
     // Get Day
-    const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const weekday = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
     const day = weekday[d.getDay()];
 
     // Get Month
