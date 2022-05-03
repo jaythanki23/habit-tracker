@@ -38,6 +38,8 @@ const HabitState = props => {
       }
     ],
     userHabits: [],
+    weekHabits: [],
+    year: null,
     day: null,
     month: null,
     date: null,
@@ -79,6 +81,9 @@ const HabitState = props => {
 
     // Get date
     const d = new Date();
+
+    // Get year
+    const year = d.getFullYear();
       
     // Get Day
     const weekday = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
@@ -92,11 +97,11 @@ const HabitState = props => {
     // Get Day of the month
     const date = d.getDate();
 
-    console.log(month);
+    // console.log(month);
     
     dispatch({
       type: SET_DATE,
-      payload: { day, month, date }
+      payload: { day, month, date, year }
     })
   }
 
@@ -110,11 +115,11 @@ const HabitState = props => {
 
     const habits = state.habits.filter(habit => habit.status === true).map(({ name }) => ({
       name,
-      duration: [],
-      dateTime: [],
-      day: [],
-      month: [],
-      date: [],
+      year: state.year,
+      day: state.day,
+      month: state.month,
+      date: state.date,
+      dateTime: state.dateTime
     }));
 
     const config = {
@@ -209,11 +214,12 @@ const HabitState = props => {
     value={{
       habits: state.habits,
       userHabits: state.userHabits,
+      weekHabits: state.weekHabits,
+      year: state.year,
       day: state.day,
       month: state.month,
       date: state.date,
       dateTime: state.dateTime,
-      months: state.months,
       error: state.error,
       setStatus,
       addHabit,

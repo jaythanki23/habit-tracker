@@ -17,7 +17,8 @@ const habitReducer = (state, action) => {
         ...state,
         day: action.payload.day,
         month: action.payload.month,
-        date: action.payload.date
+        date: action.payload.date,
+        year: action.payload.year
       }
     case ADD_USER_HABITS:
       return {
@@ -27,7 +28,8 @@ const habitReducer = (state, action) => {
     case GET_USER_HABITS:
       return {
         ...state,
-        userHabits: action.payload
+        userHabits: action.payload["habits"],
+        weekHabits: action.payload["weeks"]
       }
     case UPDATE_HABIT:
       return {

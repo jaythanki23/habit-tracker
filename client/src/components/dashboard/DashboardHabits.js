@@ -28,7 +28,8 @@ const DashboardHabits = () => {
     setText('');
   }
 
-  const habits = userHabits.filter(habit => habit.date[habit.date.length - 1] !== date).map(habit => <Habit key={habit._id} id={habit._id} name={habit.name} />)
+  // filter(habit => habit.date[habit.date.length - 1] !== date).
+  const habits = userHabits.map(habit => <Habit key={habit._id} id={habit.habit} name={habit.name} />)
 
   return (
     <>

@@ -8,7 +8,19 @@ import Week from "../model/weekModel.js";
 const getHabits = asyncHandler(async (req, res) => {
   const habits = await Habit.find({ user: req.user.id });
 
-  res.status(200).json(habits);
+  const [first, last] = getDays();
+
+  const weeks = await Promise.all(habits.map(async habit => {
+                                      const week = await Week.findOne({habit: habit._id, from: { $gt: first-1 }, to: { $lt: last+1 } });
+                                      // console.log(week);
+                                      // return week;
+                                      if(week) {
+                                        return week;
+                                      }
+                                    })
+                                  );  
+
+  res.status(200).send({ habits, weeks });
 });
 
 // @desc Create habits
@@ -20,13 +32,14 @@ const createHabits = asyncHandler(async (req, res) => {
     throw new Error('Please add a text field');
   }
 
-  const { name, day, month, date, dateTime } = req.body;
+  const { name, year, day, month, date, dateTime } = req.body;
   
   // add user id in each obj of body
   // const data = req.body.map(({ ...habit }) => ({ ...habit, user: req.user.id }))
   try {
     const habit = await Habit.create({
       name,
+      year,
       day,
       month,
       date,
@@ -34,7 +47,32 @@ const createHabits = asyncHandler(async (req, res) => {
       user: req.user.id
     });
 
-    res.status(200).json(habit);  
+    // const currentHabit = await Habit.findById(req.params.id, { _id: 1, name: 1 });
+
+    // const { _id, name } = currentHabit;
+
+    // const [first, last] = getDays();
+
+    // const newWeek = await Week.create({
+    //   name,
+    //   year,
+    //   month,
+    //   from: first,
+    //   to: last,
+    //   dayDuration: {
+    //     'Mon': 0,
+    //     'Tue': 0,
+    //     'Wed': 0,
+    //     'Thu': 0,
+    //     'Fri': 0,
+    //     'Sat': 0,
+    //     'Sun': 0
+    //   },
+    //   habit: habit._id
+    // });
+
+    res.status(200).json(habit);
+
   } catch (error) {
     res.status(500)
     throw new Error('Server Error');
@@ -46,7 +84,7 @@ const createHabits = asyncHandler(async (req, res) => {
 // @route /api/habits/:id
 // @access Private
 const updateHabit = asyncHandler(async (req, res) => {
-  const habit = await Habit.findById(req.params.id);
+  const habit = await Habit.findById(req.params.id, { _id: 1, name: 1 });
 
   if(!habit) {
     res.status(400);
@@ -55,17 +93,16 @@ const updateHabit = asyncHandler(async (req, res) => {
 
   const { day, duration, month, year } = req.body;
 
-  const { _id } = habit;
-
-  // console.log(_id);
+  const { _id, name } = habit;
 
   const [first, last] = getDays();
 
-  let week = await Week.findOne({ habit: _id, year, month, from: { $gt: first-1 }, to: { $lt: last+1 }  })
+  let week = await Week.findOne({ habit: _id, name, year, month, from: { $gt: first-1 }, to: { $lt: last+1 }  })
 
   if(!week) {
     try {
       const newWeek = await Week.create({
+        name,
         year,
         month,
         from: first,
@@ -82,7 +119,8 @@ const updateHabit = asyncHandler(async (req, res) => {
         habit: _id
       });
       // console.log(newWeek);
-      res.status(200).json(newWeek);
+      week = await Week.findOneAndUpdate({ habit: _id }, { $set: { [`dayDuration.${day}`]: parseInt(duration) } }); 
+      res.status(200).json(week);
       
     } catch (error) {
       res.status(500)
@@ -91,7 +129,8 @@ const updateHabit = asyncHandler(async (req, res) => {
 
   } else {
     try {
-      week = await Week.findOneAndUpdate({ habit: _id }, { $set: { [`dayDuration.${day}`]: duration } }); 
+      week = await Week.findOneAndUpdate({ habit: _id }, { $set: { [`dayDuration.${day}`]: parseInt(duration) } }); 
+      
       res.status(200).json(week);
       
     } catch (error) {
@@ -120,6 +159,10 @@ const deleteHabit = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Habit not found');
   }
+
+  const week = await Week.findOne({ habit: req.params.id });
+
+  await week.remove();
 
   await habit.remove();
 

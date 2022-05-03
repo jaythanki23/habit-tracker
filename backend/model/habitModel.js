@@ -12,6 +12,9 @@ const habitSchema = mongoose.Schema({
   dateTime: {
     type: Date,
   },
+  year: {
+    type: Number
+  },
   day: {
     type: String
   },

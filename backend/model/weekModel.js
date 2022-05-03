@@ -5,6 +5,9 @@ const weekSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'habit',
   },
+  name: {
+    type: String
+  },
   year: {
     type: Number
   },
