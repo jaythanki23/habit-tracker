@@ -27,7 +27,7 @@ const Progress = () => {
         <div className='d-flex flex-column align-items-center justify-content-center gap-5 border border-dark'>
           <div className='fs-1'>{month} {firstDay} - {lastDay}</div>
           <div className='d-flex flex-column align-items-center justify-content-center gap-5'>
-            {weekHabits.map(habit => <Chart key={habit._id} durationObj={habit.dayDuration} name={habit.name} />)}
+            {weekHabits.filter(habit => habit.hasOwnProperty('dayDuration')).map(habit => <Chart key={habit._id} durationObj={habit.dayDuration} name={habit.name} />)}
           </div>
         </div>
       </div>

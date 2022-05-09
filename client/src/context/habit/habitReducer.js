@@ -31,11 +31,11 @@ const habitReducer = (state, action) => {
         userHabits: action.payload["habits"],
         weekHabits: action.payload["weeks"]
       }
-    case UPDATE_HABIT:
-      return {
-        ...state,
-        userHabits: state.userHabits.map(habit => habit._id === action.payload._id ? action.payload : habit)
-      }
+    // case UPDATE_HABIT:
+    //   return {
+    //     ...state,
+    //     weekHabits: state.weekHabits.map(habit => habit._id === action.payload._id ? action.payload : habit)
+    //   }
     case HABIT_ERROR:
     case SET_ERROR:
       return {

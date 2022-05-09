@@ -5,9 +5,7 @@ import Habit from './Habit';
 const DashboardHabits = () => {
   const [text, setText] = useState('');
 
-  const { userHabits, postHabit, date, setError, error } = useContext(HabitContext);
-
-  // const myHabits = habits.filter(habit => habit.status === true);
+  const { userHabits, weekHabits, postHabit, day, setError, error } = useContext(HabitContext);
 
   const onChange = (e) => {
     setText(e.target.value);
@@ -28,8 +26,18 @@ const DashboardHabits = () => {
     setText('');
   }
 
-  // filter(habit => habit.date[habit.date.length - 1] !== date).
-  const habits = userHabits.map(habit => <Habit key={habit._id} id={habit.habit} name={habit.name} />)
+  // filter(habit => habit.date[habit.date.length - 1] !== date)
+  const habits = weekHabits.filter(habit => {
+    if(habit.hasOwnProperty('dayDuration')) {
+      return habit.dayDuration[`${day}`] === 0;
+    } else {
+      return habit;
+    }
+  }).map(habit => <Habit key={habit._id} weekid={habit.habit} id={habit._id} name={habit.name} />)
+
+
+  // const habits = userHabits.map(habit => <Habit key={habit._id} id={habit._id} name={habit.name} />);
+
 
   return (
     <>

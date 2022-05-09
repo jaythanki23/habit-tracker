@@ -179,13 +179,16 @@ const HabitState = props => {
       duration: parseInt(data.duration),
       day: state.day,
       month: state.month,
-      date: parseInt(state.date),
-      dateTime: state.dateTime
+      year: state.year
     }
+
+    console.log(data.id);
 
     try {
       const res = await axios.put(`/api/habits/${data.id}`, updatedHabit, config)
+      console.log(res);
 
+      getHabit();
       dispatch({
         type: UPDATE_HABIT,
         payload: res.data

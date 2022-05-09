@@ -2,7 +2,7 @@ import { React, useContext, useState} from 'react';
 import HabitContext from '../../context/habit/habitContext';
 
 
-const Habit = ({ id, name }) => {
+const Habit = ({ id, weekid, name }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [duration, setDuration] = useState(0);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -24,10 +24,18 @@ const Habit = ({ id, name }) => {
     //   status: isChecked,
     //   duration: duration
     // })
-    updateHabit({
-      id,
-      duration
-    });
+    if(weekid) {
+      updateHabit({
+        weekid,
+        duration
+      });
+    } else {
+      updateHabit({
+        id,
+        duration
+      });
+    }
+    
     setIsSubmitted(true);
   }
 

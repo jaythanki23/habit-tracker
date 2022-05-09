@@ -16,6 +16,8 @@ const getHabits = asyncHandler(async (req, res) => {
                                       // return week;
                                       if(week) {
                                         return week;
+                                      } else {
+                                        return habit;
                                       }
                                     })
                                   );  
@@ -35,49 +37,25 @@ const createHabits = asyncHandler(async (req, res) => {
   const { name, year, day, month, date, dateTime } = req.body;
   
   // add user id in each obj of body
-  // const data = req.body.map(({ ...habit }) => ({ ...habit, user: req.user.id }))
+  const data = req.body.map(({ ...habit }) => ({ ...habit, user: req.user.id }))
   try {
-    const habit = await Habit.create({
-      name,
-      year,
-      day,
-      month,
-      date,
-      dateTime,
-      user: req.user.id
-    });
-
-    // const currentHabit = await Habit.findById(req.params.id, { _id: 1, name: 1 });
-
-    // const { _id, name } = currentHabit;
-
-    // const [first, last] = getDays();
-
-    // const newWeek = await Week.create({
+    // const habit = await Habit.create({
     //   name,
     //   year,
+    //   day,
     //   month,
-    //   from: first,
-    //   to: last,
-    //   dayDuration: {
-    //     'Mon': 0,
-    //     'Tue': 0,
-    //     'Wed': 0,
-    //     'Thu': 0,
-    //     'Fri': 0,
-    //     'Sat': 0,
-    //     'Sun': 0
-    //   },
-    //   habit: habit._id
+    //   date,
+    //   dateTime,
+    //   user: req.user.id
     // });
+    const habits = await Habit.insertMany(data);
 
-    res.status(200).json(habit);
+    res.status(200).json(habits);
 
   } catch (error) {
     res.status(500)
     throw new Error('Server Error');
   }
-  
 });
 
 // @desc Update Habit
@@ -119,7 +97,7 @@ const updateHabit = asyncHandler(async (req, res) => {
         habit: _id
       });
       // console.log(newWeek);
-      week = await Week.findOneAndUpdate({ habit: _id }, { $set: { [`dayDuration.${day}`]: parseInt(duration) } }); 
+      week = await Week.findOneAndUpdate({ habit: _id, name, year, month, from: { $gt: first-1 }, to: { $lt: last+1 } }, { $set: { [`dayDuration.${day}`]: parseInt(duration) } }); 
       res.status(200).json(week);
       
     } catch (error) {
@@ -129,7 +107,7 @@ const updateHabit = asyncHandler(async (req, res) => {
 
   } else {
     try {
-      week = await Week.findOneAndUpdate({ habit: _id }, { $set: { [`dayDuration.${day}`]: parseInt(duration) } }); 
+      week = await Week.findOneAndUpdate({ habit: _id, name, year, month, from: { $gt: first-1 }, to: { $lt: last+1 } }, { $set: { [`dayDuration.${day}`]: parseInt(duration) } }); 
       
       res.status(200).json(week);
       
