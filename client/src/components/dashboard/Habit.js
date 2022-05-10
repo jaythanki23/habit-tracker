@@ -24,9 +24,10 @@ const Habit = ({ id, weekid, name }) => {
     //   status: isChecked,
     //   duration: duration
     // })
+    // console.log(weekid);
     if(weekid) {
       updateHabit({
-        weekid,
+        id: weekid,
         duration
       });
     } else {

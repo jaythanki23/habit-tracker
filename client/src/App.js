@@ -33,7 +33,9 @@ function App() {
                 <Route exact path='/about' element={<About />} />
                 <Route exact path='/register' element={<Register />} />
                 <Route exact path='/login' element={<Login />} />
-                <Route exact path='/progress' element={<Progress />} />
+                <Route exact path='/progress' element={<PrivateRoute>
+                                                        <Progress />
+                                                       </PrivateRoute>} />
               </Routes>
             </div>
           </div>

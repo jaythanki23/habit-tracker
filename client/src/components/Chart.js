@@ -7,33 +7,6 @@ const Plot = createPlotlyComponent(Plotly);
 
 const Chart = ({ durationObj, name, }) => {
 
-  // let start = date.lastIndexOf(firstDay);
-  // let end = date.lastIndexOf(date.length - 1);
-
-  // const x = duratio
-  // const y = duration.slice(start);
-
-  // let i = start;
-  // let diff = 0;
-  // while(i < date.length) {
-  //   if(date[i+1] - date[i] > 1) {
-      
-  //   }
-  // }
-
-  // let diff = date[date.length - 1] - firstDay;
-
-  // const y = duration.slice(start);
-  
-  // const zeros = new Array(diff-1).fill(0);
-
-
-  // let i = 1;
-  // while(i < diff) {
-  //   y.splice(i, 0, 0);
-  //   i++;
-  // }
-
   const x = Object.keys(durationObj);
   const y = Object.values(durationObj);
 
@@ -45,10 +18,38 @@ const Chart = ({ durationObj, name, }) => {
         {
           x,
           y,
-          type: 'bar'
+          type: 'bar',
+          marker: {color: 'rgb(55, 83, 109)'},
+          // font: {
+          //   color: 'forestgreen'
+          // } 
         }
         ]}
-        layout={{ title: name }} 
+        layout={
+                { 
+                  title: {
+                    text: name,
+                    font: {
+                      size: 24
+                    }
+                  }, 
+                  titlefont: {
+                    size: 16,
+                    color: 'rgb(107, 107, 107)'
+                  },
+                  paper_bgcolor: 'rgba(245,246,249,1)',
+                  plot_bgcolor: 'rgba(245,246,249,1)',
+                  width: 900,
+                  height: 600,
+                  yaxis: {
+                    title: 'mins',
+                    titlefont: {
+                      size: 16,
+                      color: 'rgb(107, 107, 107)'
+                    },
+                  }
+                } 
+              }
       />
       <hr className='mb-2' />
     </div>

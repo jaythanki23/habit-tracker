@@ -92,9 +92,7 @@ const AuthState = props => {
         type: AUTH_ERROR
       })
     }
-
   }
-
 
 
   return (
@@ -107,7 +105,7 @@ const AuthState = props => {
         register,
         login,
         logout,
-        loadUser
+        loadUser,
       }}
     >
       {props.children}

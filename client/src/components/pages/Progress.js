@@ -1,13 +1,18 @@
-import React, { useContext } from 'react';
-// import Plot from 'react-plotly.js';
+import React, { useContext, useEffect } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import HabitContext from '../../context/habit/habitContext';
 import Chart from '../Chart';
 
 
 const Progress = () => {
-  const { isAuthenticated } = useContext(AuthContext);
-  const { month, weekHabits } = useContext(HabitContext);
+  const { loadUser } = useContext(AuthContext);
+  const { month, weekHabits, getHabit, setDateTime } = useContext(HabitContext);
+
+  useEffect(() => {
+    loadUser();
+    getHabit();
+    setDateTime();
+  }, []);
 
   const curr = new Date();
   
@@ -22,16 +27,15 @@ const Progress = () => {
   lastDay = parseInt(lastDay.slice(5, 7));  
 
   return (
-    isAuthenticated ? (
-      <div className='container border border-dark mt-5 p-3 w-auto'>
-        <div className='d-flex flex-column align-items-center justify-content-center gap-5 border border-dark'>
-          <div className='fs-1'>{month} {firstDay} - {lastDay}</div>
-          <div className='d-flex flex-column align-items-center justify-content-center gap-5'>
-            {weekHabits.filter(habit => habit.hasOwnProperty('dayDuration')).map(habit => <Chart key={habit._id} durationObj={habit.dayDuration} name={habit.name} />)}
-          </div>
+    <div className='container mt-5 p-3 w-auto'>
+      <div className='d-flex flex-column align-items-center justify-content-center gap-5'>
+        <div className='fs-1'>{month} {firstDay} - {lastDay}</div>
+        <div className='d-flex flex-column align-items-center justify-content-center gap-5'>
+          {weekHabits.filter(habit => habit.hasOwnProperty('dayDuration')).map(habit => <Chart key={habit._id} durationObj={habit.dayDuration} name={habit.name} />)}
         </div>
       </div>
-    ) : (<h1>Please Login first</h1>)
+    </div>
+    
   );
 }
 
