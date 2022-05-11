@@ -46,7 +46,7 @@ const DashboardHabits = () => {
                 </div>
       }
       
-        {habits.length === 0 ? <div className='fs-2 text-center m-5 p-5'>You are all done for today!</div> : 
+        {habits.length === 0 ? <div className='fs-2 align-middle text-center m-5 p-5'>You are all done for today!</div> : 
           <div className='m-4 p-4'> 
             <table className='table'>
               <thead>

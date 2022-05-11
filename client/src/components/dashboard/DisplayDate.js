@@ -5,7 +5,7 @@ const DisplayDate = () => {
   const { day, month, date } = useContext(HabitContext);
   
   return (
-    <div className='fs-2 m-2 p-2'>{day}, {month} {date}</div>
+    <div className='fs-1 m-2 p-2'>{day}, {month} {date}</div>
   )
 }
 

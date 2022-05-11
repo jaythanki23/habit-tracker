@@ -12,10 +12,10 @@ const Navbar = () => {
   const guestLinks = (
     <>
       <li className='nav-item'>
-        <Link to='/register' className='nav-link' >Register</Link>
+        <Link to='/register' className='nav-link link-dark' >Register</Link>
       </li>
       <li className='nav-item'>
-        <Link to='/login' className='nav-link' >Login</Link>
+        <Link to='/login' className='nav-link link-dark' >Login</Link>
       </li>
     </>
   );
@@ -23,23 +23,27 @@ const Navbar = () => {
   const authLinks = (
     <>
       <li className='nav-item'>
-        <p className='nav-link' style={{'color': 'white'}}>Hello, {user && user.name}</p>
+        <Link to='/' className='nav-link link-dark' >Home</Link>
       </li>
       <li className='nav-item'>
-        <Link to='/' className='nav-link' >Home</Link>
+        <Link to='/progress' className='nav-link link-dark' >Progress</Link>
       </li>
       <li className='nav-item'>
-        <Link to='/progress' className='nav-link' >Progress</Link>
-      </li>
-      <li className='nav-item'>
-        <a href='#' className='nav-link' onClick={onClick} ><span>Logout</span></a>
+        <a href='#' className='nav-link' onClick={onClick} style={{'color': 'black'}} ><span>Logout</span></a>
       </li>
     </>
   )
 
 
   return (
-    <nav className='navbar navbar-expand-sm bg-dark navbar-dark'>
+    <nav className='navbar navbar-expand-sm' style={{"backgroundColor": "#f9f8f4"}}>
+      <div className='container-fluid'>
+        <ul className='navbar-nav'>
+          <li className='nav-item'>
+          {isAuthenticated ? <p className='nav-link' style={{'color': 'black'}}>Hello, {user && user.name}</p>: null} 
+          </li>
+        </ul>
+      </div>
       <div className='container-fluid justify-content-end'>
         <ul className='navbar-nav'>
           {isAuthenticated ? authLinks : guestLinks}

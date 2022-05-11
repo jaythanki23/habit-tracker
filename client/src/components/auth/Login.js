@@ -38,7 +38,7 @@ const Login = () => {
                   {error}
                 </div>
       }
-      <section className="vh-100" style={{"backgroundColor": "#eee"}}>
+      <section className="vh-100">
         <div className="container h-100">
           {/* <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col col-xl-10">
@@ -48,7 +48,7 @@ const Login = () => {
 
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-12 col-md-9 col-lg-7 col-xl-6">
-              <div className="card" style={{"borderRadius": "15px"}}>
+              <div className="card shadow-sm" style={{"borderRadius": "5px", "height": "30rem"}}>
                 <div className="card-body p-5">
                   <h1 className="text-center mb-5">Sign In</h1>
 
@@ -61,17 +61,17 @@ const Login = () => {
 
                         {/* <h5 className="fw-normal mb-3 pb-3 fs-2" style={{"letterSpacing": "1px"}}>Sign in</h5> */}
 
-                        <div className="form-outline mb-4">
+                        <div className="form-outline mb-5">
                           <input type="email" name='email' value={email} id="form2Example17" className="form-control form-control-lg" placeholder='Email Address' onChange={onChange} required />
                           {/* <label className="form-label" htmlFor="form2Example17">Email address</label> */}
                         </div>
 
-                        <div className="form-outline mb-4">
+                        <div className="form-outline mb-5">
                           <input type="password" name='password' value={password} id="form2Example27" className="form-control form-control-lg" placeholder='Password' onChange={onChange} required />
                           {/* <label className="form-label" htmlFor="form2Example27">Password</label> */}
                         </div>
 
-                        <div className="pt-1 mb-4">
+                        <div className="pt-1 mb-5">
                           <button className="btn btn-primary btn-lg btn-block" type="submit">Login</button>
                         </div>
                       </form>

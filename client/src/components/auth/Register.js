@@ -48,86 +48,29 @@ const Register = () => {
                     {error}
                   </div>
         }
-        <section className="vh-100" style={{"backgroundColor": "#eee"}}>
+        <section className="vh-100">
           <div className="container h-100">
-            {/* <div className="row d-flex justify-content-center align-items-center h-100">
-              <div className="col-lg-12 col-xl-11">
-                <div className="card text-black" style={{"borderRadius": "25px"}}>
-                  <div className="card-body p-md-5">
-                    <div className="row justify-content-center">
-                      <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-
-                        <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
-
-                        <form onSubmit={onSubmit} className="mx-1 mx-md-4 needs-validation" noValidate>
-
-                          <div className="d-flex flex-row align-items-center mb-4 input-group has-validation">
-                            <i className="bi bi-person-fill m-2" style={{'fontSize': '1.5rem'}}></i>
-                            <div className="form-outline flex-fill mb-0">
-                              <input type="text" name='name' value={name} id="form3Example1c" className="form-control" placeholder='Your Name' onChange={onChange} required />
-                              <div className="invalid-feedback">
-                                Please provide a username.
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="d-flex flex-row align-items-center mb-4">
-                            <i className="bi bi-envelope-fill m-2" style={{'fontSize': '1.5rem'}}></i>
-                            <div className="form-outline flex-fill mb-0">
-                              <input type="email" name='email' value={email} id="form3Example3c" className="form-control" placeholder='Your Email' onChange={onChange} required />
-                            </div>
-                          </div>
-
-                          <div className="d-flex flex-row align-items-center mb-4">
-                            <i className="bi bi-lock-fill m-2" style={{'fontSize': '1.5rem'}}></i> 
-                            <div className="form-outline flex-fill mb-0">
-                              <input type="password" name='password' value={password} id="form3Example4c" className="form-control" placeholder='Password' onChange={onChange} required/>
-                            </div>
-                          </div>
-
-                          <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                            <button type="submit" className="btn btn-primary btn-lg">Register</button>
-                          </div>
-
-                        </form>
-
-                      </div>
-                      <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp" className="img-fluid" alt="Sample image" />
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> */}
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-12 col-md-9 col-lg-7 col-xl-6">
-                <div className="card" style={{"borderRadius": "15px"}}>
+                <div className="card shadow-sm" style={{"borderRadius": "5px", "height": "35rem"}}>
                   <div className="card-body p-5">
                     <h1 className="text-center mb-5">Sign Up</h1>
 
                     <form onSubmit={onSubmit} className="mx-1 mx-md-4 needs-validation" noValidate>
-                      <div className="form-outline mb-4">
+                      <div className="form-outline mb-5">
                         <input type="text" id="form3Example1cg" name='name' value={name} className="form-control form-control-lg" placeholder='Your Name' onChange={onChange} required />
-                        {/* <label className="form-label" for="form3Example1cg">Your Name</label> */}
                         <div className="invalid-feedback">
                             Please provide a username.
                         </div>
                       </div>
 
-                      <div className="form-outline mb-4">
+                      <div className="form-outline mb-5">
                         <input type="email" name='email' value={email} id="form3Example3cg" className="form-control form-control-lg" placeholder='Your Email' onChange={onChange} required />
                       </div>
 
-                      <div className="form-outline mb-4">
+                      <div className="form-outline mb-5">
                         <input type="password" name='password' value={password} id="form3Example4cg" className="form-control form-control-lg" placeholder='Password' onChange={onChange} required />
                       </div>
-
-                      {/* <div className="form-outline mb-4">
-                        <input type="password" id="form3Example4cdg" className="form-control form-control-lg" />
-                      </div> */}
 
                       <div className="d-flex justify-content-center">
                         <button type="submit"
