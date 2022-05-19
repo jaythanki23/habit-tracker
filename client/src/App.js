@@ -5,7 +5,7 @@ import Navbar from './components/layout/Navbar';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import setAuthToken from './utils/setAuthToken';
-import Progress from './components/pages/Progress';
+import Report from './components/pages/Report';
 
 import HabitState from './context/habit/HabitState';
 import AuthState from './context/auth/AuthState';
@@ -33,8 +33,8 @@ function App() {
                 <Route exact path='/about' element={<About />} />
                 <Route exact path='/register' element={<Register />} />
                 <Route exact path='/login' element={<Login />} />
-                <Route exact path='/progress' element={<PrivateRoute>
-                                                        <Progress />
+                <Route exact path='/report' element={<PrivateRoute>
+                                                        <Report />
                                                        </PrivateRoute>} />
               </Routes>
             </div>

@@ -4,7 +4,7 @@ import HabitContext from '../../context/habit/habitContext';
 import Chart from '../Chart';
 
 
-const Progress = () => {
+const Report = () => {
   const { loadUser } = useContext(AuthContext);
   const { month, weekHabits, getHabit, setDateTime } = useContext(HabitContext);
 
@@ -30,8 +30,8 @@ const Progress = () => {
     <div className='container mt-5 p-3 w-auto'>
       <div className='d-flex flex-column align-items-center justify-content-center gap-5'>
         <div className='fs-1'>{month} {firstDay} - {lastDay}</div>
-        <div className='d-flex flex-column align-items-center justify-content-center gap-5'>
-          {weekHabits.filter(habit => habit.hasOwnProperty('dayDuration')).map(habit => <Chart key={habit._id} durationObj={habit.dayDuration} name={habit.name} />)}
+        <div className='d-flex flex-row align-items-center justify-content-around flex-wrap gap-5'>
+          {weekHabits[0].hasOwnProperty('dayDuration') ? weekHabits.filter(habit => habit.hasOwnProperty('dayDuration')).map(habit => <Chart key={habit._id} durationObj={habit.dayDuration} name={habit.name} />) : <div className='fs-2'>Please update any habit to see progress made by you</div>}
         </div>
       </div>
     </div>
@@ -39,4 +39,4 @@ const Progress = () => {
   );
 }
 
-export default Progress
+export default Report;

@@ -39,8 +39,8 @@ const Chart = ({ durationObj, name, }) => {
                   },
                   paper_bgcolor: 'rgba(245,246,249,1)',
                   plot_bgcolor: 'rgba(245,246,249,1)',
-                  width: 900,
-                  height: 600,
+                  width: 700,
+                  height: 400,
                   yaxis: {
                     title: 'mins',
                     titlefont: {

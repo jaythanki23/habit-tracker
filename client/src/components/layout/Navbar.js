@@ -26,7 +26,7 @@ const Navbar = () => {
         <Link to='/' className='nav-link link-dark' >Home</Link>
       </li>
       <li className='nav-item'>
-        <Link to='/progress' className='nav-link link-dark' >Progress</Link>
+        <Link to='/report' className='nav-link link-dark' >Report</Link>
       </li>
       <li className='nav-item'>
         <a href='#' className='nav-link' onClick={onClick} style={{'color': 'black'}} ><span>Logout</span></a>

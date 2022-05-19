@@ -1,11 +1,14 @@
 import { React, useState, useContext } from 'react'
 import HabitContext from '../../context/habit/habitContext';
+import AuthContext from '../../context/auth/authContext';
 import Habit from './Habit';
+import Spinner from '../layout/Spinner';
 
 const DashboardHabits = () => {
   const [text, setText] = useState('');
 
   const { userHabits, weekHabits, postHabit, day, setError, error } = useContext(HabitContext);
+  const { loading } = useContext(AuthContext);
 
   const onChange = (e) => {
     setText(e.target.value);
@@ -46,7 +49,7 @@ const DashboardHabits = () => {
                 </div>
       }
       
-        {habits.length === 0 ? <div className='fs-2 align-middle text-center m-5 p-5'>You are all done for today!</div> : 
+        {!loading ? habits.length === 0 ? <div className='fs-2 align-middle text-center m-5 p-5 border border-light' style={{"backgroundColor": "#f9f8f4"}}>You are all done for today!</div> : 
           <div className='m-4 p-4'> 
             <table className='table'>
               <thead>
@@ -71,7 +74,7 @@ const DashboardHabits = () => {
               </form>
             </div>
           </div>
-        }
+        : <Spinner />}
     </>
   )
 }
