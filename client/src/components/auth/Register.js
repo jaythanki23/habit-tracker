@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
 import AuthContext from '../../context/auth/authContext';
 import HabitContext from '../../context/habit/habitContext';
-import CheckboxForm from '../form/CheckboxForm';
+import CheckboxForm from '../form/CheckboxForm'
 
 
 const Register = () => {
