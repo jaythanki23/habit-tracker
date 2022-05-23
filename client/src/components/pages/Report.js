@@ -31,7 +31,7 @@ const Report = () => {
       <div className='d-flex flex-column align-items-center justify-content-center gap-5'>
         <div className='fs-1'>{month} {firstDay} - {lastDay}</div>
         <div className='d-flex flex-row align-items-center justify-content-around flex-wrap gap-5'>
-          {weekHabits[0].hasOwnProperty('dayDuration') ? weekHabits.filter(habit => habit.hasOwnProperty('dayDuration')).map(habit => <Chart key={habit._id} durationObj={habit.dayDuration} name={habit.name} />) : <div className='fs-2'>Please update any habit to see progress made by you</div>}
+          {weekHabits[0].hasOwnProperty('dayDuration') ? weekHabits.filter(habit => habit.hasOwnProperty('dayDuration')).map(habit => <Chart key={habit._id} durationObj={habit.dayDuration} name={habit.name} />) : <div className='fs-2 align-middle text-center m-5 p-5 border border-light' style={{"backgroundColor": "#f9f8f4"}}>Please update any habit to see progress made by you</div>}
         </div>
       </div>
     </div>
