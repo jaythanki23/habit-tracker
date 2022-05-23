@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
+import { path } from 'express/lib/application';
 import { errorHandler } from './middleware/errorMiddleware.js';
 import { router as habits } from './routes/habitRoutes.js';
 import { router as users } from './routes/userRoutes.js';
@@ -19,12 +20,20 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
-  res.send("Welcome to my app");
-})
+// app.get('/', (req, res) => {
+//   res.send("Welcome to my app");
+// })
 
 app.use('/api/habits', habits);
 app.use('/api/users', users);
+
+// Serve frontend
+if(process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static(path.join(__dirname, '../client/build')));
+
+  app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../', 'client', 'build', 'index.html')));
+}
 
 // Error Middleware
 app.use(errorHandler);
