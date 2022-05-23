@@ -68,4 +68,4 @@ const CheckboxForm = () => {
   )
 }
 
-export default CheckboxForm
+export default CheckboxForm;
