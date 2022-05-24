@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import colors from 'colors';
 import path from 'path';
 import { errorHandler } from './middleware/errorMiddleware.js';
-import { router as habits } from './routes/habitRoutes.js';
+import { router as habits } from './routes/habitsRoutes.js';
 import { router as users } from './routes/userRoutes.js';
 import { connectDB } from './config/db.js';
 import { dirname } from 'path';
