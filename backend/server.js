@@ -1,11 +1,13 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
-import { path } from 'express/lib/application';
+import path from 'path';
 import { errorHandler } from './middleware/errorMiddleware.js';
 import { router as habits } from './routes/habitRoutes.js';
 import { router as users } from './routes/userRoutes.js';
 import { connectDB } from './config/db.js';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config();
 
@@ -30,9 +32,10 @@ app.use('/api/users', users);
 // Serve frontend
 if(process.env.NODE_ENV === 'production') {
   // Set static folder
+  const __dirname = dirname(fileURLToPath(import.meta.url));
   app.use(express.static(path.join(__dirname, '../client/build')));
 
-  app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../', 'client', 'build', 'index.html')));
+  app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../', 'habit-tracker', 'client', 'build', 'index.html')));
 }
 
 // Error Middleware
