@@ -34,6 +34,8 @@ const createHabits = asyncHandler(async (req, res) => {
     throw new Error('Please add a text field');
   }
 
+
+
   const { name, year, day, month, date, dateTime } = req.body;
   
   // add user id in each obj of body
